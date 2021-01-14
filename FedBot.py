@@ -29,7 +29,7 @@ def sendMessage(slack_client, msg):
     # make the POST request through the python slack client
     updateMsg = slack_client.api_call(
         "chat.postMessage",
-        channel='#fed-support',
+        channel='#fedbot-test',
         text=msg
     )
 
@@ -42,7 +42,7 @@ def sendMessage(slack_client, msg):
 
 def sendBlock(slack_client, msg):
     slack_client.api_call("chat.postMessage",
-                          channel="#fed-support",
+                          channel="#fedbot-test",
                           text='Alert',
                           blocks=[
                               {
