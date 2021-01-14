@@ -137,7 +137,6 @@ def check_Priority():
             conn.commit()
 
             # Alert
-            # msg2 = f"<!here> {Priority} ALERT: <{CaseLink}|{CaseNumber}> has been added to the FED-WS1-ATL-POD queue."
             msg2 = f"{Priority} ALERT: <{CaseLink}|{CaseNumber}> has been added to the FED-WS1-ATL-POD queue."
             sendBlock(slack_client, msg2)
         
