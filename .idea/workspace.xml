@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="76436ca8-e361-4133-ac73-bbe1ef940f87" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/ACE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FedBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/FedBot.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1bPMs8IfVhug0VyQRPOVdwKW5gG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="ignore_missing_gitignore" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PythonLab" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="FedBot" is-module-sdk="true">
+        <option name="useSoftWraps" value="true" />
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="FedBot" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.tests">
+    <configuration name="FedBot" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="FedBot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\ACE\VS Code Projects\FedBot\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/Scripts" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="FedBot" type="PythonConfigurationType" factoryName="Python">
+      <module name="FedBot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\ACE\AppData\Local\Programs\Python\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/Scripts" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="FedBot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.FedBot" />
+      <item itemvalue="Python.tests" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.tests" />
+        <item itemvalue="Python.tests" />
+        <item itemvalue="Python.tests" />
+        <item itemvalue="Python.tests" />
+        <item itemvalue="Python.tests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="76436ca8-e361-4133-ac73-bbe1ef940f87" name="Default Changelist" comment="" />
+      <created>1588529478819</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1588529478819</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Added Quote of the Day">
+      <created>1590610609703</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1590610609703</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Remove quote of the day&#10;remove problem category&#10;fix notification&#10;add slack_bot_token_fedbot">
+      <created>1595870249089</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1595870249089</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Quote of the Day" />
+    <MESSAGE value="Remove quote of the day&#10;remove problem category&#10;fix notification&#10;add slack_bot_token_fedbot" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove quote of the day&#10;remove problem category&#10;fix notification&#10;add slack_bot_token_fedbot" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1409" y="62" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607528270238">
+      <screen x="-1440" y="-617" width="1152" height="2048" />
+    </state>
+    <state x="-1409" y="62" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2752.1152/-1440.-617.1152.2048@-1440.-617.1152.2048" timestamp="1607528270238" />
+    <state x="-1084" y="161" key="FileChooserDialogImpl" timestamp="1607522540414">
+      <screen x="-1440" y="-617" width="1152" height="2048" />
+    </state>
+    <state x="-1084" y="161" key="FileChooserDialogImpl/0.0.2752.1152/-1440.-617.1152.2048@-1440.-617.1152.2048" timestamp="1607522540414" />
+    <state width="1109" height="507" key="GridCell.Tab.0.bottom" timestamp="1607525154979">
+      <screen x="-1440" y="-617" width="1152" height="2048" />
+    </state>
+    <state width="1109" height="507" key="GridCell.Tab.0.bottom/0.0.2752.1152/-1440.-617.1152.2048@-1440.-617.1152.2048" timestamp="1607525154979" />
+    <state width="1109" height="507" key="GridCell.Tab.0.center" timestamp="1607525154979">
+      <screen x="-1440" y="-617" width="1152" height="2048" />
+    </state>
+    <state width="1109" height="507" key="GridCell.Tab.0.center/0.0.2752.1152/-1440.-617.1152.2048@-1440.-617.1152.2048" timestamp="1607525154979" />
+    <state width="1109" height="507" key="GridCell.Tab.0.left" timestamp="1607525154979">
+      <screen x="-1440" y="-617" width="1152" height="2048" />
+    </state>
+    <state width="1109" height="507" key="GridCell.Tab.0.left/0.0.2752.1152/-1440.-617.1152.2048@-1440.-617.1152.2048" timestamp="1607525154979" />
+    <state width="1109" height="507" key="GridCell.Tab.0.right" timestamp="1607525154979">
+      <screen x="-1440" y="-617" width="1152" height="2048" />
+    </state>
+    <state width="1109" height="507" key="GridCell.Tab.0.right/0.0.2752.1152/-1440.-617.1152.2048@-1440.-617.1152.2048" timestamp="1607525154979" />
+    <state x="-1355" y="49" key="SettingsEditor" timestamp="1607522550917">
+      <screen x="-1440" y="-617" width="1152" height="2048" />
+    </state>
+    <state x="-1355" y="49" key="SettingsEditor/0.0.2752.1152/-1440.-617.1152.2048@-1440.-617.1152.2048" timestamp="1607522550917" />
+    <state x="-1188" y="231" key="com.intellij.ide.util.TipDialog" timestamp="1609860601589">
+      <screen x="-1440" y="-617" width="1152" height="2048" />
+    </state>
+    <state x="-1188" y="231" key="com.intellij.ide.util.TipDialog/0.0.2752.1152/-1440.-617.1152.2048@-1440.-617.1152.2048" timestamp="1609860601589" />
+  </component>
+</project>

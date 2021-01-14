@@ -1,0 +1,1 @@
+Fedbot combines Salesforce and Slack by alerting Slack to important critical customer needs and team metrics happening in SF.
