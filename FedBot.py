@@ -257,8 +257,8 @@ if __name__ == "__main__":
     alreadyNotified_Priority = []
     schedule.every(30).seconds.do(getQueueDetails)
     schedule.every(30).seconds.do(check_Priority)
-    # schedule.every(30).seconds.do(check_CommitTime)
-    # schedule.every(30).seconds.do(check_Entitlement)
+    schedule.every(30).seconds.do(check_CommitTime)
+    schedule.every(30).seconds.do(check_Entitlement)
     # schedule.every(1).day.at('12:00').do(getQuote)
     schedule.every(1).day.at('17:00').do(check_IdleTime)
 
