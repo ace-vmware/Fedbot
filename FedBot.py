@@ -18,26 +18,6 @@ DATABASE_URL = os.environ["FEDBOT_DB"]
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
 
-# Commands for Heroku CLI:
-"""
-To open DB:
-heroku pg:psql --app fedbot-app
-
-Create table:
-cur.execute("CREATE TABLE alreadyNotified (id serial PRIMARY KEY, priority varchar, commit varchar, entitlement varchar);")
-
-Insert Data:
-cur.execute("INSERT INTO alreadyNotified (priority) VALUES (100000001)")
-
-Select and Return Data:
-cur.execute("SELECT priority FROM alreadyNotified")
-cur.fetchone()
-
-Rollback connection:
-conn.rollback()
-"""
-
-
 def sendMessage(slack_client, msg):
     # make the POST request through the python slack client
     updateMsg = slack_client.api_call(
