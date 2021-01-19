@@ -117,7 +117,8 @@ def getQueueDetails():
 def check_Priority():
     # Get Tickets in Federal Queue
     for case in QueueDetails.values():
-        CaseNumber = int(case.get('CaseNumber'))
+        # CaseNumber = int(case.get('CaseNumber'))
+        CaseNumber = case.get('CaseNumber')
         Priority = case.get('Priority')
         CaseLink = 'https://vmware-gs.lightning.force.com' + case.get('CaseLink')
 
@@ -276,8 +277,8 @@ if __name__ == "__main__":
     alreadyNotified_Priority = []
     schedule.every(30).seconds.do(getQueueDetails)
     schedule.every(30).seconds.do(check_Priority)
-    schedule.every(30).seconds.do(check_CommitTime)
-    schedule.every(30).seconds.do(check_Entitlement)
+    # schedule.every(30).seconds.do(check_CommitTime)
+    # schedule.every(30).seconds.do(check_Entitlement)
     # schedule.every(1).day.at('12:00').do(getQuote)
     schedule.every(1).day.at('17:00').do(check_IdleTime)
 
