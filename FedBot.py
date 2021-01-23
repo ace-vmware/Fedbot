@@ -118,8 +118,8 @@ def check_Priority():
             conn.commit()
 
             # Alert
-            msg2 = f"{Priority} ALERT: <{CaseLink}|{CaseNumber}> has been added to the FED-WS1-ATL-POD queue."
-            sendBlock(slack_client, msg2)
+            msg = f"{Priority} ALERT: <{CaseLink}|{CaseNumber}> has been added to the FED-WS1-ATL-POD queue."
+            sendBlock(slack_client, msg)
         
         else:
             logging.debug(f"{CaseNumber} already added to TABLE alreadyNotified COLUMN Priority")
@@ -127,6 +127,7 @@ def check_Priority():
 
 def check_CommitTime():
     for case in QueueDetails.values():
+
         CaseNumber = case.get('CaseNumber')
         CaseLink = 'https://vmware-gs.lightning.force.com' + case.get('CaseLink')
         FirstResponseDue_minutes = case.get('FirstResponseDue_minutes')
@@ -143,7 +144,6 @@ def check_CommitTime():
                 and FirstResponseDue_minutes > 0 \
                 and not CaseNumber in responses \
                 and FirstResponseMet == None:
-                # and CaseNumber not in alreadyNotified_CommitTime \
 
                 logging.debug(f"{CaseNumber} not in {responses}. Updating DB...")
 
@@ -152,24 +152,40 @@ def check_CommitTime():
                 conn.commit()
 
                 # Alert
-                # msg2 = f"<!here> <{CaseLink}|{CaseNumber}> has {FirstResponseDue_minutes} minutes until missed commit."
-                msg2 = f"<{CaseLink}|{CaseNumber}> has {FirstResponseDue_minutes} minutes until missed commit."
+                msg = f"<{CaseLink}|{CaseNumber}> has {FirstResponseDue_minutes} minutes until missed commit."
                 logging.debug(f"{CaseNumber} Posted to Slack")
-                sendBlock(slack_client, msg2)
+                sendBlock(slack_client, msg)
+
+        else:
+            logging.debug(f"{CaseNumber} already added to TABLE alreadyNotified COLUMN Commit")
 
 
 def check_Entitlement():
     for case in QueueDetails.values():
+
         CaseNumber = case.get('CaseNumber')
         CaseLink = 'https://vmware-gs.lightning.force.com' + case.get('CaseLink')
-        Name_of_Entitlement__c = case.get('Name_of_Entitlement__c')
-        if ('federal' not in Name_of_Entitlement__c.lower()) and (CaseNumber not in alreadyNotified_Entitlement):
-            msg2 = f"<!here> <{CaseLink}|{CaseNumber}> does not have a Federal entitlement according to SalesForce. " \
-                   f"Please check <https://www.vmware.com/admin/login.portal|VMware Admin> to verify."
-            alreadyNotified_Entitlement.append(CaseNumber)
-            logging.debug(f"Added {CaseNumber} to alreadyNotified_Entitlement")
-            logging.debug("Posted to Slack")
-            sendBlock(slack_client, msg2)
+        Name_of_Entitlement__c = case.get('Name_of_Entitlement__c').lower()
+
+        # Query DB for alreadyNotified
+        cur.execute("SELECT entitlement FROM alreadyNotified")
+        responses = [i[0] for i in cur.fetchall()]
+
+    if ('federal' not in Name_of_Entitlement__c) and (not CaseNumber in responses):
+
+        logging.debug(f"{CaseNumber} not in {responses}. Updating DB...")
+
+        # Add
+        cur.execute(f"INSERT INTO alreadyNotified (entitlement) VALUES ({CaseNumber})")
+        conn.commit()
+
+        # Alert
+        msg = f"<!here> <{CaseLink}|{CaseNumber}> does not have a Federal entitlement according to SalesForce."
+        logging.debug("Posted to Slack")
+        sendBlock(slack_client, msg)
+
+    else:
+        logging.debug(f"{CaseNumber} already added to TABLE alreadyNotified COLUMN Entitlement")
 
 
 def check_ProblemCategory():
@@ -177,7 +193,7 @@ def check_ProblemCategory():
         "SELECT CaseNumber,Case_Owner_Name__c,GSS_Problem_Category__c, GSS_Case__c "
         "FROM Case "
         "WHERE Case_Owner_Name__c IN "
-        "('Ryan Prisco', 'Gia Cao', 'Nathan Turner', 'Adam Evancho', 'Mark Curbeam', 'Nick Moyer') "
+        "('Ryan Prisco', 'Gia Cao', 'Adam Evancho', 'Mark Curbeam', 'Nick Moyer', Travis Williams, Steven Marcolla) "
         "AND Status != 'Closed'"
     )
 
@@ -206,7 +222,7 @@ def check_ProblemCategory():
 def check_IdleTime():
     query = sf.query("""SELECT CaseNumber,Case_Owner_Name__c,Case_Idle_Time_Business_Days__c,Id
                         FROM Case
-                        WHERE Case_Owner_Name__c in ('Ryan Prisco', 'Gia Cao', 'Adam Evancho', 'Nathan Turner', 
+                        WHERE Case_Owner_Name__c in ('Ryan Prisco', 'Gia Cao', 'Adam Evancho', 
                         'Mark Curbeam', 'Steven Marcolla','Travis Williams', 'Nick Moyer')
                         AND Case_Idle_Time_Business_Days__c > 2
                         AND Status != 'Closed'
@@ -223,26 +239,26 @@ def check_IdleTime():
     sendBlock(slack_client, msg)
 
 
-def getQuote():
-    global quote_of_the_day
-    r = praw.Reddit(client_id=os.environ['reddit_client_id'],
-                    client_secret=os.environ['reddit_client_secret'],
-                    user_agent=os.environ['reddit_user_agent'])
+# def getQuote():
+#     global quote_of_the_day
+#     r = praw.Reddit(client_id=os.environ['reddit_client_id'],
+#                     client_secret=os.environ['reddit_client_secret'],
+#                     user_agent=os.environ['reddit_user_agent'])
 
-    url_rising = r.subreddit('QuotesPorn').random_rising().url
-    url_hot = r.subreddit('QuotesPorn').hot().url
-    url_new = r.subreddit('QuotesPorn').new().url
-    params = {"limit": 1}
-    posts = r.request('GET', url_new, params=params)
+#     url_rising = r.subreddit('QuotesPorn').random_rising().url
+#     url_hot = r.subreddit('QuotesPorn').hot().url
+#     url_new = r.subreddit('QuotesPorn').new().url
+#     params = {"limit": 1}
+#     posts = r.request('GET', url_new, params=params)
 
-    # Filter data
-    children = posts.get('data').get('children')
-    for i in children:
-        for n in i.get('data').get('preview').get('images'):
-            quote_of_the_day = n.get('source').get('url')
+#     # Filter data
+#     children = posts.get('data').get('children')
+#     for i in children:
+#         for n in i.get('data').get('preview').get('images'):
+#             quote_of_the_day = n.get('source').get('url')
 
-    msg = f'Good Morning Federal Agents!\n\nToday\'s Quote of the Day provided by:\n {quote_of_the_day}'
-    sendMessage(slack_client, msg)
+#     msg = f'Good Morning Federal Agents!\n\nToday\'s Quote of the Day provided by:\n {quote_of_the_day}'
+#     sendMessage(slack_client, msg)
 
 
 # Run Jobs
@@ -261,6 +277,7 @@ if __name__ == "__main__":
     schedule.every(30).seconds.do(check_Entitlement)
     # schedule.every(1).day.at('12:00').do(getQuote)
     schedule.every(1).day.at('17:00').do(check_IdleTime)
+    schedule.every(1).day.at('17:00').do(check_ProblemCategory)
 
     while True:
         schedule.run_pending()
