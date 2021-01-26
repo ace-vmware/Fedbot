@@ -118,7 +118,7 @@ def check_Priority():
             conn.commit()
 
             # Alert
-            msg = f"{Priority} ALERT: <{CaseLink}|{CaseNumber}> has been added to the FED-WS1-ATL-POD queue."
+            msg = f"<!here> {Priority} ALERT: <{CaseLink}|{CaseNumber}> has been added to the FED-WS1-ATL-POD queue."
             sendBlock(slack_client, msg)
         
         else:
@@ -152,7 +152,7 @@ def check_CommitTime():
                 conn.commit()
 
                 # Alert
-                msg = f"<{CaseLink}|{CaseNumber}> has {FirstResponseDue_minutes} minutes until missed commit."
+                msg = f"<!here> <{CaseLink}|{CaseNumber}> has {FirstResponseDue_minutes} minutes until missed commit."
                 logging.debug(f"{CaseNumber} Posted to Slack")
                 sendBlock(slack_client, msg)
 
@@ -188,35 +188,35 @@ def check_Entitlement():
         logging.debug(f"{CaseNumber} already added to TABLE alreadyNotified COLUMN Entitlement")
 
 
-def check_ProblemCategory():
-    q = sf.query(
-        "SELECT CaseNumber,Case_Owner_Name__c,GSS_Problem_Category__c, GSS_Case__c "
-        "FROM Case "
-        "WHERE Case_Owner_Name__c IN "
-        "('Ryan Prisco', 'Gia Cao', 'Adam Evancho', 'Mark Curbeam', 'Nick Moyer', Travis Williams, Steven Marcolla) "
-        "AND Status != 'Closed'"
-    )
+# def check_ProblemCategory():
+#     q = sf.query(
+#         "SELECT CaseNumber,Case_Owner_Name__c,GSS_Problem_Category__c, GSS_Case__c "
+#         "FROM Case "
+#         "WHERE Case_Owner_Name__c IN "
+#         "('Ryan Prisco', 'Gia Cao', 'Adam Evancho', 'Mark Curbeam', 'Nick Moyer', Travis Williams, Steven Marcolla) "
+#         "AND Status != 'Closed'"
+#     )
 
-    records = q.get('records')
-    Prob_Cat_Violators = {}
-    for record in records:
-        CaseNumber = record.get('CaseNumber')
-        WS1_Prob_Cat = record.get('GSS_Problem_Category__c')
-        CaseOwner = record.get('Case_Owner_Name__c')
-        CaseLink = record.get('GSS_Case__c').split('"')[1]
-        if WS1_Prob_Cat == 'Workspace One':
-            if CaseOwner not in Prob_Cat_Violators.keys():
-                Prob_Cat_Violators[f'{CaseOwner}'] = [CaseNumber, CaseLink]
-            else:
-                Prob_Cat_Violators[f'{CaseOwner}'].append(CaseNumber)
-                Prob_Cat_Violators[f'{CaseOwner}'].append(CaseLink)
+#     records = q.get('records')
+#     Prob_Cat_Violators = {}
+#     for record in records:
+#         CaseNumber = record.get('CaseNumber')
+#         WS1_Prob_Cat = record.get('GSS_Problem_Category__c')
+#         CaseOwner = record.get('Case_Owner_Name__c')
+#         CaseLink = record.get('GSS_Case__c').split('"')[1]
+#         if WS1_Prob_Cat == 'Workspace One':
+#             if CaseOwner not in Prob_Cat_Violators.keys():
+#                 Prob_Cat_Violators[f'{CaseOwner}'] = [CaseNumber, CaseLink]
+#             else:
+#                 Prob_Cat_Violators[f'{CaseOwner}'].append(CaseNumber)
+#                 Prob_Cat_Violators[f'{CaseOwner}'].append(CaseLink)
 
-    msg = f'Halftime Report:\nPlease see the following tickets with Problem Category of Workspace One:\n\n'
-    for k, v in Prob_Cat_Violators.items():
-        msg += k + ': \n'
-        for i in range(0, len(v) - 1, 2):
-            msg += '- ' + v[i] + ' ' + 'https://vmware-gs.lightning.force.com' + v[i + 1] + '\n'
-    sendMessage(slack_client, msg)
+#     msg = f'Halftime Report:\nPlease see the following tickets with Problem Category of Workspace One:\n\n'
+#     for k, v in Prob_Cat_Violators.items():
+#         msg += k + ': \n'
+#         for i in range(0, len(v) - 1, 2):
+#             msg += '- ' + v[i] + ' ' + 'https://vmware-gs.lightning.force.com' + v[i + 1] + '\n'
+#     sendMessage(slack_client, msg)
 
 
 def check_IdleTime():
@@ -277,7 +277,7 @@ if __name__ == "__main__":
     schedule.every(30).seconds.do(check_Entitlement)
     # schedule.every(1).day.at('12:00').do(getQuote)
     schedule.every(1).day.at('17:00').do(check_IdleTime)
-    schedule.every(1).day.at('17:00').do(check_ProblemCategory)
+    # schedule.every(1).day.at('17:00').do(check_ProblemCategory)
 
     while True:
         schedule.run_pending()
