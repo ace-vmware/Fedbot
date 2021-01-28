@@ -35,7 +35,7 @@ def sendMessage(slack_client, msg):
 
 def sendBlock(slack_client, msg):
     slack_client.api_call("chat.postMessage",
-                          channel="#fedbot-test",
+                          channel="#fed-support",
                           text='Alert',
                           blocks=[
                               {
