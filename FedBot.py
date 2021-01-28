@@ -22,7 +22,7 @@ def sendMessage(slack_client, msg):
     # make the POST request through the python slack client
     updateMsg = slack_client.api_call(
         "chat.postMessage",
-        channel='#fedbot-test',
+        channel='#fed-support',
         text=msg
     )
 
