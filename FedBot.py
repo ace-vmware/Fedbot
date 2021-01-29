@@ -59,7 +59,7 @@ def getQueueDetails():
         "toLabel(Airwatch_Group__c), toLabel(GSS_Problem_Category__c), Id, RecordTypeId, CurrencyIsoCode, "
         "SystemModstamp, Contact.Id, ContactId, Contact.RecordTypeId, Account.Id, AccountId, Account.RecordTypeId, "
         "Entitlement.Id, EntitlementId, GSS_First_Resp_Met__c, GSS_Case__c, GSS_Case_Idle_Time_Days__c, EP_Bug_URL__c,"
-        "Name_of_Entitlement__c, LastModifiedDate "
+        "Name_of_Entitlement__c, LastModifiedDate, EA_Name__c, Description "
         "FROM Case "
         "WHERE OwnerId = '00Gf4000002djYA' "
         "ORDER BY CaseNumber ASC NULLS FIRST, Id ASC NULLS FIRST"
@@ -77,6 +77,8 @@ def getQueueDetails():
         Status = record.get('Status')
         Case_Idle_Time_Business_Days__c = record.get('Case_Idle_Time_Business_Days__c')
         EP_Bug_URL__c = record.get('EP_Bug_URL__c')
+        EA_Name__c = record.get('EA_Name__c')
+        Description = record.get('Description')
 
         # Build Case Details and add to Queue Details
         CaseDetails = {
@@ -88,7 +90,9 @@ def getQueueDetails():
             'Status': Status,
             'EP_Bug_URL__c': EP_Bug_URL__c,
             'Case_Idle_Time_Business_Days__c': Case_Idle_Time_Business_Days__c,
-            'Name_of_Entitlement__c': Name_of_Entitlement__c
+            'Name_of_Entitlement__c': Name_of_Entitlement__c,
+            'EA_Name__c': EA_Name__c,
+            'Description': Description
         }
 
         QueueDetails['Case_' + str(record_num + 1)] = CaseDetails
@@ -101,6 +105,8 @@ def check_Priority():
         CaseNumber = case.get('CaseNumber')
         Priority = case.get('Priority')
         CaseLink = 'https://vmware-gs.lightning.force.com' + case.get('CaseLink')
+        EA_Name__c = case.get('EA_Name__c')
+        Description = case.get('Description')[0:200]
 
         logging.debug(f"CaseNumber is {CaseNumber}. Priority is: {Priority}")
 
@@ -118,7 +124,10 @@ def check_Priority():
             conn.commit()
 
             # Alert
-            msg = f"<!here> {Priority} ALERT: <{CaseLink}|{CaseNumber}> has been added to the FED-WS1-ATL-POD queue."
+            msg = f"<!here> {Priority} ALERT: <{CaseLink}|{CaseNumber}> has been added to the FED-WS1-ATL-POD queue.\n\n" \
+                  f"Customer: {EA_Name__c}\n" \
+                  f"Description: {Description}" 
+
             sendBlock(slack_client, msg)
         
         else:
@@ -166,6 +175,8 @@ def check_Entitlement():
         CaseNumber = case.get('CaseNumber')
         CaseLink = 'https://vmware-gs.lightning.force.com' + case.get('CaseLink')
         Name_of_Entitlement__c = case.get('Name_of_Entitlement__c').lower()
+        EA_Name__c = case.get('EA_Name__c')
+
 
         # Query DB for alreadyNotified
         cur.execute("SELECT entitlement FROM alreadyNotified")
@@ -180,7 +191,9 @@ def check_Entitlement():
         conn.commit()
 
         # Alert
-        msg = f"<!here> <{CaseLink}|{CaseNumber}> does not have a Federal entitlement according to SalesForce."
+        msg = f"<!here> <{CaseLink}|{CaseNumber}> does not have a Federal entitlement according to SalesForce.\n\n" \
+              f"Customer: {EA_Name__c}\n" \
+              f"Entitlement Type: {Name_of_Entitlement__c}"
         logging.debug("Posted to Slack")
         sendBlock(slack_client, msg)
 
