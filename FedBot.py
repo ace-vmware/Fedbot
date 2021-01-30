@@ -125,8 +125,8 @@ def check_Priority():
 
             # Alert
             msg = f"<!here> {Priority} ALERT: <{CaseLink}|{CaseNumber}> has been added to the FED-WS1-ATL-POD queue.\n\n" \
-                  f"Customer: {EA_Name__c}\n" \
-                  f"Description: {Description}" 
+                  f"*Customer:* {EA_Name__c}\n" \
+                  f"*Description:* {Description}" 
 
             sendBlock(slack_client, msg)
         
