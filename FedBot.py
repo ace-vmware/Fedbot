@@ -174,7 +174,7 @@ def check_Entitlement():
 
         CaseNumber = case.get('CaseNumber')
         CaseLink = 'https://vmware-gs.lightning.force.com' + case.get('CaseLink')
-        entitlement = case.get('Name_of_Entitlement__c')
+        Name_of_Entitlement__c = case.get('Name_of_Entitlement__c')
         EA_Name__c = case.get('EA_Name__c')
 
 
@@ -182,23 +182,23 @@ def check_Entitlement():
         cur.execute("SELECT entitlement FROM alreadyNotified")
         responses = [i[0] for i in cur.fetchall()]
 
-    if ('federal' not in entitlement.lower()) and (not CaseNumber in responses):
+        if ('federal' not in Name_of_Entitlement__c.lower()) and (not CaseNumber in responses):
 
-        logging.debug(f"{CaseNumber} not in {responses}. Updating DB...")
+            logging.debug(f"{CaseNumber} not in {responses}. Updating DB...")
 
-        # Add
-        cur.execute(f"INSERT INTO alreadyNotified (entitlement) VALUES ({CaseNumber})")
-        conn.commit()
+            # Add
+            cur.execute(f"INSERT INTO alreadyNotified (entitlement) VALUES ({CaseNumber})")
+            conn.commit()
 
-        # Alert
-        msg = f"<!here> <{CaseLink}|{CaseNumber}> does not have a Federal entitlement according to SalesForce.\n\n" \
-              f"Customer: {EA_Name__c}\n" \
-              f"Entitlement Type: {entitlement}"
-        logging.debug("Posted to Slack")
-        sendBlock(slack_client, msg)
+            # Alert
+            msg = f"<!here> <{CaseLink}|{CaseNumber}> does not have a Federal entitlement according to SalesForce.\n\n" \
+                f"Customer: {EA_Name__c}\n" \
+                f"Entitlement Type: {Name_of_Entitlement__c}"
+            logging.debug("Posted to Slack")
+            sendBlock(slack_client, msg)
 
-    else:
-        logging.debug(f"{CaseNumber} already added to TABLE alreadyNotified COLUMN Entitlement")
+        else:
+            logging.debug(f"{CaseNumber} already added to TABLE alreadyNotified COLUMN Entitlement")
 
 
 # def check_ProblemCategory():
